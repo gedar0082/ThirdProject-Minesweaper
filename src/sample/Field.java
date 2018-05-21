@@ -1,4 +1,5 @@
 package sample;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Field {
@@ -26,13 +27,13 @@ public class Field {
     }
     public void clickCell(int row, int column) {
         field[row][column].setVisile();
-        int[][] nearest = field[row][column].getNearestCells(row,column);
+        ArrayList<PareCords> nearest = field[row][column].getNearestCells(row,column);
         int countOpened = 0;
-        for (int i = 0; i < nearest.length; i++) {
+        for (int i = 0; i < nearest.size(); i++) {
             if (field[row][column].getMines() == 0) {
-                clickCell(nearest[i][0],nearest[i][1]);
-                System.out.println(nearest[i][0]);
-                System.out.println(nearest[i][0]);
+                clickCell(nearest.get(i).getY(), nearest.get(i).getX());
+                System.out.println(nearest.get(i).getY());
+                System.out.println(nearest.get(i).getX());
             }
         }
     }

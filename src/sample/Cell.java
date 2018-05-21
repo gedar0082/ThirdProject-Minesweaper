@@ -51,34 +51,75 @@ public class Cell {
         }
     }
 
-    private int[][] nearestCells = new int[6][2];
-    public int[][] getNearestCells(int row, int column){
-        if (row % 2 == 0){
-            nearestCells[0][0] = row;
-            nearestCells[0][1] = column - 1;
-            nearestCells[1][0] = row -1;
-            nearestCells[1][1] = column;
-            nearestCells[2][0] = row - 1;
-            nearestCells[2][1] = column + 1;
-            nearestCells[3][0] = row;
-            nearestCells[3][1] = column + 1;
-            nearestCells[4][0] = row + 1;
-            nearestCells[4][1] = column + 1;
-            nearestCells[5][0] = row + 1;
-            nearestCells[5][1] = column;
-        }else{
-            nearestCells[0][0] = row-1;
-            nearestCells[0][1] = column;
-            nearestCells[1][0] = row -1;
-            nearestCells[1][1] = column - 1;
-            nearestCells[2][0] = row - 1;
-            nearestCells[2][1] = column;
-            nearestCells[3][0] = row;
-            nearestCells[3][1] = column + 1;
-            nearestCells[4][0] = row + 1;
-            nearestCells[4][1] = column;
-            nearestCells[5][0] = row + 1;
-            nearestCells[5][1] = column;
+
+    public ArrayList<PareCords> nearestCells = new ArrayList<>();
+    public ArrayList<PareCords> getNearestCells(int row, int column){
+        for (int i = 0; i < 6; i ++ ){
+            if (row % 2 == 0){
+
+                if(column > 0) {
+                    PareCords f = new PareCords(row, column - 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(row > 0){
+                    PareCords f = new PareCords(row - 1, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(column < field.getSize() - 1 && row > 0){
+                    PareCords f = new PareCords(row - 1, column + 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(column < field.getSize() - 1){
+                    PareCords f = new PareCords(row, column + 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(column < field.getSize() - 1 && row < field.getSize() - 1){
+                    PareCords f = new PareCords(row + 1, column + 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getSize() - 1){
+                    PareCords f = new PareCords(row + 1, column);
+                    nearestCells.add(i, f);
+                }
+
+            }else{
+
+                if(column > 0){
+                    PareCords f = new PareCords(row, column - 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(row > 0){
+                    PareCords f = new PareCords(row - 1, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(row > 0 && column < field.getSize() - 1){
+                    PareCords f = new PareCords(row - 1, column + 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(column < field.getSize() - 1){
+                    PareCords f = new PareCords(row, column + 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getSize() - 1){
+                    PareCords f = new PareCords(row + 1, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getSize() - 1 && column > 0){
+                    PareCords f = new PareCords(row + 1, column - 1);
+                    nearestCells.add(i,f);
+                }
+            }
+
         }
         return nearestCells;
     }
