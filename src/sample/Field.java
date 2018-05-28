@@ -1,20 +1,21 @@
 package sample;
 import java.util.ArrayList;
-import java.util.Random;
-
 public class Field {
 
-    private int size;
-
-    final Random random = new Random();
+    private int lenght;
+    private int height;
+    private boolean mine;
 
     protected Cell[][] field;
-    Field(int size){
-        this.size = size;
-        field = new Cell[size][size];
-        for (int row = 0; row < size; row ++){
-            for (int column = 0; column < size; column ++){
-                boolean mine =random.nextBoolean();
+    Field(int height, int lenght){
+        this.height = height;
+        this.lenght = lenght;
+        field = new Cell[height][lenght];
+        for (int row = 0; row < height; row ++){
+            for (int column = 0; column < lenght; column ++){
+                int c = (int)(Math.random() * 8);
+                if(c == 0) mine = true;
+                else mine = false;
                     field[row][column] = new Cell(mine,false,false, this);
                     field[row][column].getNearestCells(row,column);
             }
@@ -22,18 +23,23 @@ public class Field {
         Controller.field=this;
     }
 
-    public int getSize(){
-        return size;
+    public int getLenght(){
+        return lenght;
+    }
+
+    public int getHeight(){
+        return height;
     }
     public void clickCell(int row, int column) {
-        field[row][column].setVisile();
+        field[row][column].setVisible();
         ArrayList<PareCords> nearest = field[row][column].getNearestCells(row,column);
-        int countOpened = 0;
         for (int i = 0; i < nearest.size(); i++) {
-            if (field[row][column].getMines() == 0) {
+            field[nearest.get(i).getY()][nearest.get(i).getX()].setVisible();
+            System.out.println(field[row][column].getNearestMines());
+            field[row][column].nullMines();
+            if (field[row][column].getNearestMines() == 0 && !field[row][column].getVisibility()) {
+                field[row][column].setVisible();
                 clickCell(nearest.get(i).getY(), nearest.get(i).getX());
-                System.out.println(nearest.get(i).getY());
-                System.out.println(nearest.get(i).getX());
             }
         }
     }

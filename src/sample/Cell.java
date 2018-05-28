@@ -7,18 +7,24 @@ public class Cell {
     private int mines;
     Cell(boolean mine, boolean visibility, boolean flag, Field field){
         this.mine = mine;
-        mines = (int)(Math.random() * 10) % 7;
-        if (mines > 6) mines = 0;
-        this.field = field;
         this.visibility = visibility;
         this.flag = flag;
         this.field = field;
     }
+
     private boolean mine;
     private boolean visibility;
     private boolean flag;
-    public int getMines() {
+    public int getNearestMines() {
+        for(int i = 0; i < nearestCells.size(); i++) {
+            if (field.getCell(nearestCells.get(i).getY(), nearestCells.get(i).getX()).getMine()){
+                mines++;
+            }
+        }
         return mines;
+    }
+    public void nullMines(){
+        mines = 0;
     }
 
     public boolean getVisibility(){
@@ -33,7 +39,7 @@ public class Cell {
         return mine;
     }
 
-    public void setVisile(){
+    public void setVisible(){
         if(!visibility){
             visibility = true;
         }
@@ -57,8 +63,23 @@ public class Cell {
         for (int i = 0; i < 6; i ++ ){
             if (row % 2 == 0){
 
-                if(column > 0) {
-                    PareCords f = new PareCords(row, column - 1);
+                if(row < field.getHeight() - 2) {
+                    PareCords f = new PareCords(row + 2, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getHeight() - 1){
+                    PareCords f = new PareCords(row + 1, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getHeight() - 1 && column > 0){
+                    PareCords f = new PareCords(row + 1, column - 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(row > 0 && column > 0){
+                    PareCords f = new PareCords(row - 1, column - 1);
                     nearestCells.add(i, f);
                 }
 
@@ -67,30 +88,30 @@ public class Cell {
                     nearestCells.add(i, f);
                 }
 
-                if(column < field.getSize() - 1 && row > 0){
-                    PareCords f = new PareCords(row - 1, column + 1);
-                    nearestCells.add(i, f);
-                }
-
-                if(column < field.getSize() - 1){
-                    PareCords f = new PareCords(row, column + 1);
-                    nearestCells.add(i, f);
-                }
-
-                if(column < field.getSize() - 1 && row < field.getSize() - 1){
-                    PareCords f = new PareCords(row + 1, column + 1);
-                    nearestCells.add(i, f);
-                }
-
-                if(row < field.getSize() - 1){
-                    PareCords f = new PareCords(row + 1, column);
+                if(row > 1){
+                    PareCords f = new PareCords(row - 2, column);
                     nearestCells.add(i, f);
                 }
 
             }else{
 
-                if(column > 0){
-                    PareCords f = new PareCords(row, column - 1);
+                if(row < field.getHeight() - 2) {
+                    PareCords f = new PareCords(row + 2, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getHeight() - 1){
+                    PareCords f = new PareCords(row + 1, column);
+                    nearestCells.add(i, f);
+                }
+
+                if(row < field.getHeight() - 1 && column < field.getLenght() - 1){
+                    PareCords f = new PareCords(row + 1, column + 1);
+                    nearestCells.add(i, f);
+                }
+
+                if(row > 0 && column < field.getLenght() - 1){
+                    PareCords f = new PareCords(row - 1, column + 1);
                     nearestCells.add(i, f);
                 }
 
@@ -99,24 +120,9 @@ public class Cell {
                     nearestCells.add(i, f);
                 }
 
-                if(row > 0 && column < field.getSize() - 1){
-                    PareCords f = new PareCords(row - 1, column + 1);
+                if(row > 1){
+                    PareCords f = new PareCords(row - 2, column);
                     nearestCells.add(i, f);
-                }
-
-                if(column < field.getSize() - 1){
-                    PareCords f = new PareCords(row, column + 1);
-                    nearestCells.add(i, f);
-                }
-
-                if(row < field.getSize() - 1){
-                    PareCords f = new PareCords(row + 1, column);
-                    nearestCells.add(i, f);
-                }
-
-                if(row < field.getSize() - 1 && column > 0){
-                    PareCords f = new PareCords(row + 1, column - 1);
-                    nearestCells.add(i,f);
                 }
             }
 
