@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
@@ -20,23 +21,37 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //String imageBG = getClass().getResource("1.png").toExternalForm();
+
+
+
+
+
+
         Group root = new Group();
         primaryStage.setTitle("Miner");
         primaryStage.setScene(new Scene(root, 700, 600));
         primaryStage.show();
         Polygon[][] buttons = new Polygon[height][lenght];
         Field field = new Field(height, lenght);
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < lenght; j++) {
                 if (i % 2 == 0) {
                     buttons[i][j] = drawGex(20+60*j,17 + 17*i,20);
-                    buttons[i][j].setFill(Color.DEEPPINK);
+                    buttons[i][j].setStroke(Color.ORANGE);
+                    //buttons[i][j].setFill(new ImagePattern(new Image(imageBG)));
+                    buttons[i][j].setFill(Color.YELLOW);
                     root.getChildren().add(buttons[i][j]);
+
 
                 } else {
                     buttons[i][j] = drawGex(50 + 60*j, 17 + 17 * i, 20);
-                    buttons[i][j].setFill(Color.PURPLE);
+                    buttons[i][j].setStroke(Color.ORANGE);
+                    buttons[i][j].setFill(Color.YELLOW);
                     root.getChildren().add(buttons[i][j]);
+
+
                 }
             }
         }
