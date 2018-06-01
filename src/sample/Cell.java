@@ -20,7 +20,6 @@ public class Cell {
         for(int i = 0; i < nearestCells.size(); i++) {
             if (field.getCell(nearestCells.get(i).getY(), nearestCells.get(i).getX()).getMine()){
                 mines++;
-                System.out.println("mines " + mines);
             }
         }
         return mines;
@@ -47,14 +46,7 @@ public class Cell {
 
 
     public void setFlag(){
-        if(!flag){
-            flag = true;
-            return;
-        }
-        if(flag){
-            flag = false;
-            return;
-        }
+        flag = !flag;
     }
 
 
@@ -67,41 +59,35 @@ public class Cell {
                 if(row < field.getHeight() - 2) {
                     PareCords f = new PareCords(row + 2, column);
                     nearestCells.add(f);
-                    System.out.println("test1 " +nearestCells.size());
                 }
 
                 if(row < field.getHeight() - 1){
                     PareCords f = new PareCords(row + 1, column);
                     nearestCells.add(f);
-                    System.out.println("test2 " +nearestCells.size());
 
                 }
 
                 if(row < field.getHeight() - 1 && column > 0){
                     PareCords f = new PareCords(row + 1, column - 1);
                     nearestCells.add(f);
-                    System.out.println("test3 " +nearestCells.size());
 
                 }
 
                 if(row > 0 && column > 0){
                     PareCords f = new PareCords(row - 1, column - 1);
                     nearestCells.add(f);
-                    System.out.println("test4 " +nearestCells.size());
 
                 }
 
                 if(row > 0){
                     PareCords f = new PareCords(row - 1, column);
                     nearestCells.add(f);
-                    System.out.println("test5 " +nearestCells.size());
 
                 }
 
                 if(row > 1){
                     PareCords f = new PareCords(row - 2, column);
                     nearestCells.add(f);
-                    System.out.println("test6 " +nearestCells.size());
 
                 }
 
@@ -110,46 +96,37 @@ public class Cell {
                 if (row < field.getHeight() - 2) {
                     PareCords f = new PareCords(row + 2, column);
                     nearestCells.add(f);
-                    System.out.println("test " + nearestCells.size());
 
                 }
 
                 if (row < field.getHeight() - 1) {
                     PareCords f = new PareCords(row + 1, column);
                     nearestCells.add(f);
-                    System.out.println("test " + nearestCells.size());
 
                 }
 
                 if (row < field.getHeight() - 1 && column < field.getLenght() - 1) {
                     PareCords f = new PareCords(row + 1, column + 1);
                     nearestCells.add(f);
-                    System.out.println("test " + nearestCells.size());
 
                 }
 
                 if (row > 0 && column < field.getLenght() - 1) {
                     PareCords f = new PareCords(row - 1, column + 1);
                     nearestCells.add(f);
-                    System.out.println("test " + nearestCells.size());
 
                 }
 
                 if (row > 0) {
                     PareCords f = new PareCords(row - 1, column);
                     nearestCells.add(f);
-                    System.out.println("test " + nearestCells.size());
-
                 }
 
                 if (row > 1) {
                     PareCords f = new PareCords(row - 2, column);
                     nearestCells.add(f);
-                    System.out.println("test " + nearestCells.size());
-
                 }
             }
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         return nearestCells;
 
     }
