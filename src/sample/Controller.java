@@ -53,6 +53,9 @@ public class Controller {
             for(int j = 0; j< buttons[0].length; j++) {
                 if (!field.getCell(i,j).getVisibility()) {
                     buttons[i][j].setFill(Color.ORANGE);
+                    if(field.getCell(i,j).getFlag()){
+                        buttons[i][j].setFill(new ImagePattern(new Image(flag)));
+                    }
 
                 } else {
                     if (field.getCell(i,j).getNearestMines() == 0) {
@@ -80,9 +83,7 @@ public class Controller {
                     if (field.getCell(i,j).getMine()) {
                         buttons[i][j].setFill(new ImagePattern(new Image(bomb)));
                     }
-                    if(field.getCell(i,j).getFlag()){
-                        buttons[i][j].setFill(new ImagePattern(new Image(flag)));
-                    }
+
 
 
                 }
