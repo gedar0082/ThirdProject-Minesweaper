@@ -3,12 +3,10 @@ package sample;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
 
 
 public class Controller {
@@ -41,9 +39,6 @@ public class Controller {
                         Controller.refresh();
                     }
                 });
-
-
-
             }
         }
     }
@@ -52,40 +47,37 @@ public class Controller {
         for (int i =0; i < buttons.length; i++) {
             for(int j = 0; j< buttons[0].length; j++) {
                 if (!field.getCell(i,j).getVisibility()) {
-                    buttons[i][j].setFill(Color.ORANGE);
+                    buttons[i][j].setFill(Color.YELLOW);
                     if(field.getCell(i,j).getFlag()){
                         buttons[i][j].setFill(new ImagePattern(new Image(flag)));
                     }
 
                 } else {
-                    if (field.getCell(i,j).getNearestMines() == 0) {
+                    if (field.getNearestMines(i,j) == 0) {
                         buttons[i][j].setFill(Color.WHITE);
                     }
-                    if (field.getCell(i,j).getNearestMines() == 1) {
+                    if (field.getNearestMines(i,j) == 1) {
                         buttons[i][j].setFill(new ImagePattern(new Image(img1)));
                     }
-                    if (field.getCell(i,j).getNearestMines() == 2) {
+                    if (field.getNearestMines(i,j) == 2) {
                         buttons[i][j].setFill(new ImagePattern(new Image(img2)));
                     }
-                    if (field.getCell(i,j).getNearestMines() == 3) {
+                    if (field.getNearestMines(i,j) == 3) {
                         buttons[i][j].setFill(new ImagePattern(new Image(img3)));
                     }
-                    if (field.getCell(i,j).getNearestMines() == 4) {
+                    if (field.getNearestMines(i,j) == 4) {
                         buttons[i][j].setFill(new ImagePattern(new Image(img4)));
                     }
-                    if (field.getCell(i,j).getNearestMines() == 5) {
+                    if (field.getNearestMines(i,j) == 5) {
                         buttons[i][j].setFill(new ImagePattern(new Image(img5)));
                     }
-                    if (field.getCell(i,j).getNearestMines() == 6) {
+                    if (field.getNearestMines(i,j) == 6) {
                         buttons[i][j].setFill(new ImagePattern(new Image(img6)));
                     }
 
                     if (field.getCell(i,j).getMine()) {
                         buttons[i][j].setFill(new ImagePattern(new Image(bomb)));
                     }
-
-
-
                 }
             }
         }
